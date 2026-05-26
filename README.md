@@ -156,7 +156,6 @@ Este notebook está diseñado para ejecutarse en un **clúster Spark** con acces
 ## 📚 Referencias
 
 - [UCI Bank Marketing Dataset](https://archive.ics.uci.edu/dataset/222/bank+marketing)
-- [PySpark ML Documentation](https://spark.apache.org/docs/latest/ml-guide.html)
 - Moro, S., Cortez, P., & Rita, P. (2014). *A Data-Driven Approach to Predict the Success of Bank Telemarketing*. Decision Support Systems.
 
 ---
