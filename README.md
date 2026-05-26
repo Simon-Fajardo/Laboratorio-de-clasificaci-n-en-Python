@@ -1,84 +1,84 @@
-# Laboratorio-de-clasificacion-en-Python
-# 🏦 Bank Marketing Classification with PySpark ML
+# Laboratorio-de-clasification-en-Python
+# Bank Marketing Classification with PySpark ML
 
 > **Big Data Processing — Pontificia Universidad Javeriana**  
-> Autor: Simón Andrés Fajardo Franky  
-> Fecha: Abril 28 – Mayo 25, 2026
+> Author: Simón Andrés Fajardo Franky  
+> Date: April 28 – May 25, 2026
 
 ---
 
-## 📋 Descripción
+## Description
 
-Este proyecto implementa y compara cinco modelos de clasificación de Machine Learning usando **Apache Spark (PySpark)** sobre el dataset de marketing bancario del repositorio UCI. El objetivo es predecir si un cliente suscribirá un depósito a término fijo, a partir de campañas de marketing directo (llamadas telefónicas) realizadas por una institución bancaria portuguesa.
-
----
-
-## 🎯 Objetivo
-
-Aplicar el proceso completo de tratamiento de datos y modelos de clasificación en un entorno distribuido con Spark ML, incluyendo:
-
-- Exploración y análisis de datos (EDA)
-- Limpieza y transformación de variables
-- Balanceo de clases mediante oversampling
-- Codificación de variables categóricas
-- Entrenamiento y evaluación de múltiples modelos de clasificación
+This project implements and compares five Machine Learning classification models using **Apache Spark (PySpark)** on the bank marketing dataset from the UCI repository. The objective is to predict whether a client will subscribe to a term deposit based on direct marketing campaigns (phone calls) conducted by a Portuguese banking institution.
 
 ---
 
-## 📊 Dataset
+## Objective
 
-**Fuente:** [UCI Machine Learning Repository — Bank Marketing Dataset](https://archive.ics.uci.edu/dataset/222/bank+marketing)
+Apply the complete data processing and classification workflow in a distributed Spark ML environment, including:
 
-El dataset contiene información sobre campañas de marketing directo de un banco portugués. La variable objetivo (`y`) indica si el cliente suscribió o no un depósito a término fijo.
+- Exploratory Data Analysis (EDA)
+- Data cleaning and variable transformation
+- Class balancing through oversampling
+- Encoding categorical variables
+- Training and evaluation of multiple classification models
 
-| Variable | Tipo | Descripción |
+---
+
+## Dataset
+
+**Source:** [UCI Machine Learning Repository — Bank Marketing Dataset](https://archive.ics.uci.edu/dataset/222/bank+marketing)
+
+The dataset contains information related to direct marketing campaigns from a Portuguese bank. The target variable (`y`) indicates whether the client subscribed to a term deposit.
+
+| Variable | Type | Description |
 |---|---|---|
-| `age` | Integer | Edad del cliente |
-| `job` | Categorical | Tipo de trabajo |
-| `marital` | Categorical | Estado civil |
-| `education` | Categorical | Nivel educativo |
-| `default` | Binary | ¿Tiene crédito en mora? |
-| `balance` | Integer | Saldo promedio anual (euros) |
-| `housing` | Binary | ¿Tiene préstamo de vivienda? |
-| `loan` | Binary | ¿Tiene préstamo personal? |
-| `contact` | Categorical | Tipo de contacto (cellular/telephone) |
-| `duration` | Integer | Duración de la última llamada (segundos) |
-| `campaign` | Integer | Número de contactos en esta campaña |
-| `pdays` | Integer | Días desde el último contacto previo |
-| `previous` | Integer | Contactos anteriores a esta campaña |
-| `poutcome` | Categorical | Resultado de la campaña anterior |
-| `y` | Binary | **Variable objetivo** — ¿Suscribió el depósito? |
+| `age` | Integer | Client age |
+| `job` | Categorical | Job type |
+| `marital` | Categorical | Marital status |
+| `education` | Categorical | Education level |
+| `default` | Binary | Has credit in default? |
+| `balance` | Integer | Average yearly balance (euros) |
+| `housing` | Binary | Has housing loan? |
+| `loan` | Binary | Has personal loan? |
+| `contact` | Categorical | Contact type (cellular/telephone) |
+| `duration` | Integer | Duration of the last call (seconds) |
+| `campaign` | Integer | Number of contacts during this campaign |
+| `pdays` | Integer | Days since the previous contact |
+| `previous` | Integer | Number of contacts before this campaign |
+| `poutcome` | Categorical | Outcome of the previous campaign |
+| `y` | Binary | **Target variable** — Did the client subscribe to the deposit? |
 
 ---
 
-## 🗂️ Estructura del Notebook
+## Notebook Structure
 
-```
+```text
 Lab_Clasification_Fajardo.ipynb
 │
-├── 1. Configuración de la sesión Spark
-├── 2. Carga de datos desde HDFS
-├── 3. Comprensión y descripción del dataset
-│   ├── Schema y tipos de datos
-│   ├── Estadísticas descriptivas
-│   └── Distribución de la variable objetivo
-├── 4. Análisis Exploratorio de Datos (EDA)
-│   ├── Histogramas de variables numéricas
-│   ├── Boxplots por clase objetivo
-│   ├── Matriz de correlación (Pearson)
+├── 1. Spark Session Configuration
+├── 2. Data Loading from HDFS
+├── 3. Dataset Understanding and Description
+│   ├── Schema and data types
+│   ├── Descriptive statistics
+│   └── Target variable distribution
+├── 4. Exploratory Data Analysis (EDA)
+│   ├── Histograms of numerical variables
+│   ├── Boxplots by target class
+│   ├── Correlation matrix (Pearson)
 │   ├── Pairplot
-│   └── Análisis de variables categóricas
-├── 5. Limpieza y tratamiento de datos
-│   ├── Verificación de valores nulos
-│   ├── Revisión y filtrado de outliers (PREVIOUS > 30)
-│   └── Eliminación de columna PDAYS
-├── 6. Balanceo de clases (Oversampling)
+│   └── Categorical variable analysis
+├── 5. Data Cleaning and Processing
+│   ├── Null value verification
+│   ├── Outlier filtering (PREVIOUS > 30)
+│   └── Removal of PDAYS column
+├── 6. Class Balancing (Oversampling)
 ├── 7. Feature Engineering
-│   ├── StringIndexer + OneHotEncoder para variables categóricas
-│   ├── VectorAssembler para construcción del vector de features
-│   └── Pipeline de transformación
-├── 8. División Train/Test (80/20)
-└── 9. Modelos de clasificación
+│   ├── StringIndexer + OneHotEncoder for categorical variables
+│   ├── VectorAssembler for feature vector construction
+│   └── Transformation pipeline
+├── 8. Train/Test Split (80/20)
+└── 9. Classification Models
     ├── Logistic Regression
     ├── Decision Tree
     ├── Random Forest
@@ -88,9 +88,9 @@ Lab_Clasification_Fajardo.ipynb
 
 ---
 
-## 🤖 Modelos Implementados
+## Implemented Models
 
-| Modelo | Librería PySpark |
+| Model | PySpark Library |
 |---|---|
 | Logistic Regression | `pyspark.ml.classification.LogisticRegression` |
 | Decision Tree | `pyspark.ml.classification.DecisionTreeClassifier` |
@@ -98,16 +98,17 @@ Lab_Clasification_Fajardo.ipynb
 | Gradient Boosted Tree | `pyspark.ml.classification.GBTClassifier` |
 | Support Vector Machine | `pyspark.ml.classification.LinearSVC` |
 
-Cada modelo es evaluado con:
-- **Matriz de Confusión**
-- **Curva ROC y AUC**
-- **Accuracy, Precision, Recall y F1-Score**
+Each model is evaluated using:
+
+- **Confusion Matrix**
+- **ROC Curve and AUC**
+- **Accuracy, Precision, Recall, and F1-Score**
 
 ---
 
-## 📈 Resultados
+## Results
 
-| Modelo | Accuracy | Precision | Recall | F1-Score | AUC ROC |
+| Model | Accuracy | Precision | Recall | F1-Score | AUC ROC |
 |---|---|---|---|---|---|
 | Gradient Boosted Tree | **~85.8%** | **~85.9%** | **~85.8%** | **~85.8%** | **~0.93** |
 | Support Vector Machine | ~85%+ | ~85%+ | ~85%+ | ~85%+ | ~0.93 |
@@ -115,53 +116,53 @@ Cada modelo es evaluado con:
 | Random Forest | ~80%+ | ~80%+ | ~80%+ | ~80%+ | ~0.76 |
 | Decision Tree | ~80%+ | ~80%+ | ~80%+ | ~80%+ | ~0.76 |
 
-> ✅ **Mejor modelo: Gradient Boosted Tree (GBT)** — Mayor AUC y métricas más balanceadas.
+> **Best Model: Gradient Boosted Tree (GBT)** — Highest AUC and most balanced performance metrics.
 
 ---
 
-## 🔑 Hallazgos Principales
+## Main Findings
 
-- La variable `duration` (duración de la llamada) es la que mayor correlación presenta con la variable objetivo (0.39).
-- El dataset presenta un **fuerte desbalance de clases**: 88.3% "no" vs. 11.7% "yes", corregido con oversampling.
-- La eliminación de la columna `pdays` (81%+ de registros con valor -1) y el filtrado de `previous > 30` mejoraron la calidad del dataset.
-- Variables como `day`, `age` y `balance` presentan correlación lineal débil con la variable objetivo.
+- The variable `duration` (call duration) showed the highest correlation with the target variable (0.39).
+- The dataset presented a strong class imbalance: 88.3% `"no"` vs. 11.7% `"yes"`, corrected through oversampling.
+- Removing the `pdays` column (81%+ of records with value -1) and filtering `previous > 30` improved dataset quality.
+- Variables such as `day`, `age`, and `balance` showed weak linear correlation with the target variable.
 
 ---
 
-## 🛠️ Tecnologías y Librerías
+## Technologies and Libraries
 
-- **Apache Spark / PySpark** — Procesamiento distribuido y ML
+- **Apache Spark / PySpark** — Distributed processing and Machine Learning
 - **Python 3.x**
-- **pandas** — Manipulación de DataFrames
-- **NumPy** — Álgebra matricial
-- **Matplotlib / Seaborn** — Visualización
-- **scikit-learn** — Cálculo de curvas ROC (`roc_curve`, `auc`)
-- **findspark** — Inicialización del entorno Spark
+- **pandas** — DataFrame manipulation
+- **NumPy** — Matrix algebra
+- **Matplotlib / Seaborn** — Visualization
+- **scikit-learn** — ROC curve calculations (`roc_curve`, `auc`)
+- **findspark** — Spark environment initialization
 
 ---
 
-## ⚙️ Requisitos de Entorno
+## Environment Requirements
 
-Este notebook está diseñado para ejecutarse en un **clúster Spark** con acceso a HDFS. Requiere:
+This notebook is designed to run on a **Spark cluster** with HDFS access. It requires:
 
-- Apache Spark configurado con un Master en la red local
-- HDFS con el archivo `bank-full.csv` en la ruta `/csv/`
-- Scheduler FAIR configurado con `fairscheduler.xml`
-- Python con las librerías listadas arriba instaladas
+- Apache Spark configured with a Master node on the local network
+- HDFS with the file `bank-full.csv` located in the `/csv/` directory
+- FAIR Scheduler configured with `fairscheduler.xml`
+- Python with all required libraries installed
 
-> ⚠️ **Nota:** La IP del Master Spark (`spark://10.43.97.187:7077`) y la dirección HDFS (`hdfs://10.195.34.34:9000`) son específicas del entorno universitario. Deben ajustarse según el clúster disponible.
+> **Note:** The Spark Master IP (`spark://10.43.97.187:7077`) and the HDFS address (`hdfs://10.195.34.34:9000`) are specific to the university environment and should be adapted according to the available cluster.
 
 ---
 
-## 📚 Referencias
+## References
 
 - [UCI Bank Marketing Dataset](https://archive.ics.uci.edu/dataset/222/bank+marketing)
 - Moro, S., Cortez, P., & Rita, P. (2014). *A Data-Driven Approach to Predict the Success of Bank Telemarketing*. Decision Support Systems.
 
 ---
 
-## 👤 Autor
+## Author
 
 **Simón Andrés Fajardo Franky**  
-Pontificia Universidad Javeriana — Big Data Processment  
+Pontificia Universidad Javeriana — Big Data Processing  
 2026
